@@ -1,3 +1,3 @@
-/home/rafael/UCO/IMC/skeletonLA1IMC/la1/build/CMakeFiles/rebuild_cache.dir
-/home/rafael/UCO/IMC/skeletonLA1IMC/la1/build/CMakeFiles/edit_cache.dir
-/home/rafael/UCO/IMC/skeletonLA1IMC/la1/build/CMakeFiles/la1.dir
+/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/build/CMakeFiles/rebuild_cache.dir
+/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/build/CMakeFiles/edit_cache.dir
+/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/build/CMakeFiles/la1.dir

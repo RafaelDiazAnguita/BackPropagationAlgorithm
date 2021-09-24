@@ -65,6 +65,15 @@ void MultilayerPerceptron::freeMemory() {
 // ------------------------------
 // Feel all the weights (w) with random numbers between -1 and +1
 void MultilayerPerceptron::randomWeights() {
+	for (size_t i = 0; i < nOfLayers; i++)
+	for (size_t j = 0; j < layers[i].nOfNeurons; j++)
+	{
+		double *val = new double;
+		*val = rand()%3-1;
+		layers[i].neurons[j].w = val;
+	}
+	
+	
 
 }
 
@@ -177,17 +186,6 @@ Dataset* MultilayerPerceptron::readData(const char *fileName) {
 		}
 		
 	}
-	
-
-	for (size_t i = 0; i < dataset->nOfPatterns; i++)
-	for (size_t j = 0; j < dataset->nOfInputs; j++)
-		std::cout << dataset->inputs[i][j] << std::endl;
-
-	for (size_t i = 0; i < dataset->nOfPatterns; i++)
-	for (size_t j = 0; j < dataset->nOfOutputs; j++)
-		std::cout << dataset->outputs[i][j] << std::endl;
-	
-	
 
 	return dataset;
 }

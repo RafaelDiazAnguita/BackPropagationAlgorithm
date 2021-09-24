@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/rafael/UCO/IMC/skeletonLA1IMC/la1/imc/MultilayerPerceptron.cpp" "/home/rafael/UCO/IMC/skeletonLA1IMC/la1/build/CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.o"
-  "/home/rafael/UCO/IMC/skeletonLA1IMC/la1/la1.cpp" "/home/rafael/UCO/IMC/skeletonLA1IMC/la1/build/CMakeFiles/la1.dir/la1.cpp.o"
+  "/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/imc/MultilayerPerceptron.cpp" "/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/build/CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.o"
+  "/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/la1.cpp" "/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/build/CMakeFiles/la1.dir/la1.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
