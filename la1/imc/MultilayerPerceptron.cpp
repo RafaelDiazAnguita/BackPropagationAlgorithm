@@ -65,15 +65,18 @@ void MultilayerPerceptron::freeMemory() {
 // ------------------------------
 // Feel all the weights (w) with random numbers between -1 and +1
 void MultilayerPerceptron::randomWeights() {
-	for (size_t i = 0; i < nOfLayers; i++)
-	for (size_t j = 0; j < layers[i].nOfNeurons; j++)
-	{
-		double *val = new double;
-		*val = rand()%3-1;
-		layers[i].neurons[j].w = val;
+	for (size_t j = 0; j < nOfLayers-1; j++){
+		for (size_t i = 0; i < layers[j].nOfNeurons; i++)
+		{
+			layers[j].neurons[i].w = new double[ layers[j+1].nOfNeurons ];
+			for (size_t k = 0; k < layers[j+1].nOfNeurons; k++){
+				
+				layers[j].neurons[i].w[k] = (double) (rand()%3-1);
+				
+			}
+	
+		}
 	}
-	
-	
 
 }
 
@@ -145,6 +148,35 @@ void MultilayerPerceptron::printNetwork() {
 // input is the input vector of the pattern and target is the desired output vector of the pattern
 void MultilayerPerceptron::performEpochOnline(double* input, double* target) {
 
+	//INPUT FORWARD PROPAGATE
+	double bias = 0;
+	for (size_t j = 1; j < nOfLayers; j++)
+	{
+		
+		for (size_t i = 0; i < layers[j].nOfNeurons; i++)
+		{
+			double output = 0;
+			if( j == 1){ //INPUT LAYER
+				for (size_t k = 0; k < layers[j-1].nOfNeurons; k++)
+				{
+					output += layers[j-1].neurons[k].w[k] * input[k];
+				}
+			}
+			else{ //HIDDEN LAYERS
+				for (size_t k = 0; k < layers[j-1].nOfNeurons; k++)
+				{
+					output += layers[j-1].neurons[k].w[k] * layers[j-1].neurons[k].out;
+				}
+				output += bias;
+			}
+
+			layers[j].neurons[i].out = 1/(1+exp(-output));	
+			
+		}
+
+		
+	}
+	
 }
 
 // ------------------------------
