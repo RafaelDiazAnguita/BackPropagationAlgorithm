@@ -83,7 +83,11 @@ void MultilayerPerceptron::randomWeights() {
 // ------------------------------
 // Feed the input neurons of the network with a vector passed as an argument
 void MultilayerPerceptron::feedInputs(double* input) {
-
+	for (size_t i = 0; i < layers[0].nOfNeurons; i++)
+	{
+		layers[0].neurons[i].out = input[i];
+	}
+	
 }
 
 // ------------------------------
@@ -108,20 +112,64 @@ void MultilayerPerceptron::restoreWeights() {
 // ------------------------------
 // Calculate and propagate the outputs of the neurons, from the first layer until the last one -->-->
 void MultilayerPerceptron::forwardPropagate() {
+	for (size_t j = 1; j < nOfLayers; j++)
+	{
+		for (size_t i = 0; i < layers[j].nOfNeurons; i++)
+		{
+			double output_sum = 0;
+			//HIDDEN LAYERS AND OUTPUT LAYER
+			for (size_t k = 0; k < layers[j-1].nOfNeurons; k++)
+			{
+				output_sum += layers[j-1].neurons[k].w[k] * layers[j-1].neurons[k].out;
+			}
+			//output_sum += bias;
+			
+			layers[j].neurons[i].out = 1/(1+exp(-output_sum));	
+		}
+	}
 	
 }
 
 // ------------------------------
 // Obtain the output error (MSE) of the out vector of the output layer wrt a target vector and return it
 double MultilayerPerceptron::obtainError(double* target) {
-	return -1;
+	double error = 0.0;
+		for (size_t i = 0; i < layers[nOfLayers-1].nOfNeurons; i++)
+		{
+			error += pow((layers[nOfLayers-1].neurons[i].out - target[i] ),2);
+		}
+		error *= 0.5;
+	return error;
 }
 
 
 // ------------------------------
 // Backpropagate the output error wrt a vector passed as an argument, from the last layer to the first one <--<--
 void MultilayerPerceptron::backpropagateError(double* target) {
-	
+
+	int j = nOfLayers - 1;
+	while ( j >= 0){
+
+		for (size_t i = 0; i < layers[j].nOfNeurons; i++)
+		{	
+			//output layers
+			if ( j == nOfLayers-1){
+				layers[j].neurons[i].delta = (layers[j].neurons[i].out - target[i]) * layers[j].neurons[i].out * (1-layers[j].neurons[i].out);
+			}
+			//hidden layers and input layer
+			else{
+				double d = 0.0;
+				for (size_t k = 0; k < layers[j+1].nOfNeurons; k++)
+					d += layers[j+1].neurons[k].delta * layers[j].neurons[i].w[k];
+
+				d = d * layers[j].neurons[i].out * (1-layers[j].neurons[i].out);
+				layers[j].neurons[i].delta = d;
+			}
+		}
+
+		j--;
+	}
+			
 }
 
 
@@ -134,7 +182,19 @@ void MultilayerPerceptron::accumulateChange() {
 // ------------------------------
 // Update the network weights, from the first layer to the last one
 void MultilayerPerceptron::weightAdjustment() {
-
+	for (size_t j = 0; j < nOfLayers-1; j++)
+	{
+		for (size_t i = 0; i < layers[j].nOfNeurons; i++)
+		{
+			for (size_t k = 0; k < layers[j+1].nOfNeurons; k++)
+			{
+				layers[j].neurons[i].w[k] = layers[j+1].neurons[k].delta * layers[j].neurons[i].out;
+			}
+			
+		}
+		
+	}
+	
 
 }
 
@@ -148,43 +208,14 @@ void MultilayerPerceptron::printNetwork() {
 // input is the input vector of the pattern and target is the desired output vector of the pattern
 void MultilayerPerceptron::performEpochOnline(double* input, double* target) {
 
-	//INPUT FORWARD PROPAGATION
-	double bias = 0;
-	for (size_t j = 1; j < nOfLayers; j++)
-	{
-		
-		for (size_t i = 0; i < layers[j].nOfNeurons; i++)
-		{
-			double output_sum = 0;
-			if( j == 1){ //INPUT LAYER
-				for (size_t k = 0; k < layers[j-1].nOfNeurons; k++)
-				{
-					output_sum += layers[j-1].neurons[k].w[k] * input[k];
-				}
-			}
-			else{ //HIDDEN LAYERS AND OUTPUT LAYER
-				for (size_t k = 0; k < layers[j-1].nOfNeurons; k++)
-				{
-					output_sum += layers[j-1].neurons[k].w[k] * layers[j-1].neurons[k].out;
-				}
-				//output_sum += bias;
-					
-			}
-			layers[j].neurons[i].out = 1/(1+exp(-output_sum));	
-		}
-	}
-	//ERROR BACKPROPAGATION
-	for (size_t j = nOfLayers-1; j >= 0; j--)
-	{
-		for (size_t i = 0; i < layers[j].nOfNeurons; i++)
-		{
-			if( j == nOfLayers -1 ){ 	//OUTPUT LAYER
 
-			} 
-		}
-		
-	}
+	feedInputs(input);
 	
+	forwardPropagate();
+	
+	backpropagateError(target);
+	
+	weightAdjustment();
 
 	
 }
@@ -244,7 +275,14 @@ void MultilayerPerceptron::trainOnline(Dataset* trainDataset) {
 // ------------------------------
 // Test the network with a dataset and return the MSE
 double MultilayerPerceptron::test(Dataset* testDataset) {
-	return -1.0;
+	int i;
+	double error = 0.0;
+	for(i=0; i<testDataset->nOfPatterns; i++){
+		feedInputs(testDataset->inputs[i]);
+		forwardPropagate();
+		error += obtainError(testDataset->outputs[i]);
+	}
+	return error;
 }
 
 
