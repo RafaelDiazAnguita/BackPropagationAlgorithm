@@ -163,7 +163,7 @@ void MultilayerPerceptron::backpropagateError(std::vector<double> target)
 			//output layers
 			if (j == nOfLayers - 1)
 			{
-				layers[j].neurons[i].delta = (layers[j].neurons[i].out - target[i]) * layers[j].neurons[i].out * (1 - layers[j].neurons[i].out);
+				layers[j].neurons[i].delta = (target[i] - layers[j].neurons[i].out ) * layers[j].neurons[i].out * (1 - layers[j].neurons[i].out);
 			}
 			//hidden layers and input layer
 			else
