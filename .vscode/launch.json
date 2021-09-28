@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/build/la1",
-            "args": ["-t","/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/datasetsPr1IMC/dat/test_xor.dat"],
+            "args": ["-t","/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/datasetsPr1IMC/dat/test_xor.dat","-h","3"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],

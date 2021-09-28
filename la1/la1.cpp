@@ -157,6 +157,7 @@ int main(int argc, char **argv) {
         double *testErrors = new double[5];
         double *trainErrors = new double[5];
         double bestTestError = 1;
+        
         for(int i=0; i<5; i++){
             cout << "**********" << endl;
             cout << "SEED " << seeds[i] << endl;
