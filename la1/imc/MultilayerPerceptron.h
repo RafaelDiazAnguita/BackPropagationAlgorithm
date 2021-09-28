@@ -7,6 +7,8 @@
 #ifndef _MULTILAYERPERCEPTRON_H_
 #define _MULTILAYERPERCEPTRON_H_
 
+#include <vector>
+
 namespace imc{
 
 // Suggested structures
@@ -14,29 +16,29 @@ namespace imc{
 struct Neuron {
 	double  out;            /* Output produced by the neuron (out_j^h)*/
 	double  delta;          /* Derivative of the output produced by the neuron (delta_j^h)*/
-	double* w;              /* Input weight vector (w_{ji}^h)*/
+	std::vector<double> w;              /* Input weight vector (w_{ji}^h)*/
 	double* deltaW;         /* Change to be applied to every weight (\Delta_{ji}^h (t))*/
 	double* lastDeltaW;     /* Last change applied to the every weight (\Delta_{ji}^h (t-1))*/
-	double* wCopy;          /* Copy of the input weights */
+	std::vector<double> wCopy;          /* Copy of the input weights */
 };
 
 struct Layer {
 	int     nOfNeurons;   /* Number of neurons of the layer*/
-	Neuron* neurons;      /* Vector with the neurons of the layer*/
+	std::vector<Neuron> neurons;      /* Vector with the neurons of the layer*/
 };
 
 struct Dataset {
 	int nOfInputs;     /* Number of inputs */
 	int nOfOutputs;    /* Number of outputs */
 	int nOfPatterns;   /* Number of patterns */
-	double** inputs;   /* Matrix with the inputs of the problem */
-	double** outputs;  /* Matrix with the outputs of the problem */
+	std::vector<std::vector<double>> inputs;   /* Matrix with the inputs of the problem */
+	std::vector<std::vector<double>> outputs;  /* Matrix with the outputs of the problem */
 };
 
 class MultilayerPerceptron {
 private:
 	int    nOfLayers;     /* Total number of layers in the network */
-	Layer* layers;        /* Vector containing every layer */
+	std::vector<Layer> layers;        /* Vector containing every layer */
 
 	// Free memory for the data structures
 	void freeMemory();
@@ -45,10 +47,10 @@ private:
 	void randomWeights();
 
 	// Feed the input neurons of the network with a vector passed as an argument
-	void feedInputs(double* input);
+	void feedInputs(std::vector<double> input);
 
 	// Get the outputs predicted by the network (out vector the output layer) and save them in the vector passed as an argument
-	void getOutputs(double* output);
+	void getOutputs(std::vector<double> output);
 
 	// Make a copy of all the weights (copy w in wCopy)
 	void copyWeights();
@@ -60,10 +62,10 @@ private:
 	void forwardPropagate();
 
 	// Obtain the output error (MSE) of the out vector of the output layer wrt a target vector and return it
-	double obtainError(double* target);
+	double obtainError(std::vector<double> target);
 
 	// Backpropagate the output error wrt a vector passed as an argument, from the last layer to the first one <--<--
-	void backpropagateError(double* target);
+	void backpropagateError(std::vector<double> target);
 
 	// Accumulate the changes produced by one pattern and save them in deltaW
 	void accumulateChange();
@@ -76,7 +78,7 @@ private:
 
 	// Perform an epoch: forward propagate the inputs, backpropagate the error and adjust the weights
 	// input is the input vector of the pattern and target is the desired output vector of the pattern
-	void performEpochOnline(double* input, double* target);
+	void performEpochOnline(std::vector<double> input, std::vector<double> target);
 
 
 public:
@@ -97,7 +99,7 @@ public:
 	// Allocate memory for the data structures
     // nl is the number of layers and npl is a vetor containing the number of neurons in every layer
     // Give values to Layer* layers
-	int initialize(int nl, int npl[]);
+	int initialize(int nl, std::vector<int> npl);
 
 	// Read a dataset from a file name and return it
 	Dataset* readData(const char *fileName);

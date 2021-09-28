@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
 
     // a: Option that requires an argument
     // a:: The argument required is optional
-    while ((c = getopt(argc, argv, "T:w:p:t:i:l:h:e:m:v:d")) != -1)
+    while ((c = getopt(argc, argv, "T:w:p:t:i:l:h:e:m:v:d:")) != -1)
     {
         // The parameters needed for using the optional prediction mode of Kaggle have been included.
         // You should add the rest of parameters needed for the lab assignment.
@@ -136,7 +136,8 @@ int main(int argc, char **argv) {
         if ( l_flag )
             layers = atoi( l_value );
     	
-    	int * topology = new int[layers+2];
+        std::vector<int> topology;
+        topology.resize(layers+2);
         topology[0] = trainDataset->nOfInputs;
         topology[layers+1] = trainDataset->nOfOutputs; 
 
