@@ -138,6 +138,7 @@ int main(int argc, char **argv) {
     	
         std::vector<int> topology;
         topology.resize(layers+2);
+        
         topology[0] = trainDataset->nOfInputs;
         topology[layers+1] = trainDataset->nOfOutputs; 
 

@@ -20,6 +20,7 @@ struct Neuron {
 	double* deltaW;         /* Change to be applied to every weight (\Delta_{ji}^h (t))*/
 	double* lastDeltaW;     /* Last change applied to the every weight (\Delta_{ji}^h (t-1))*/
 	std::vector<double> wCopy;          /* Copy of the input weights */
+	double bias;
 };
 
 struct Layer {
