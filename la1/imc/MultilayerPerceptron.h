@@ -17,10 +17,13 @@ struct Neuron {
 	double  out;            /* Output produced by the neuron (out_j^h)*/
 	double  delta;          /* Derivative of the output produced by the neuron (delta_j^h)*/
 	std::vector<double> w;              /* Input weight vector (w_{ji}^h)*/
-	double* deltaW;         /* Change to be applied to every weight (\Delta_{ji}^h (t))*/
-	double* lastDeltaW;     /* Last change applied to the every weight (\Delta_{ji}^h (t-1))*/
-	std::vector<double> wCopy;          /* Copy of the input weights */
+	std::vector<double> deltaW;         /* Change to be applied to every weight (\Delta_{ji}^h (t))*/
 	double bias;
+	double deltaBias;
+	double lastBias;
+	std::vector<double> lastDeltaW;     /* Last change applied to the every weight (\Delta_{ji}^h (t-1))*/
+	std::vector<double> wCopy;          /* Copy of the input weights */
+	
 };
 
 struct Layer {
@@ -51,7 +54,7 @@ private:
 	void feedInputs(std::vector<double> input);
 
 	// Get the outputs predicted by the network (out vector the output layer) and save them in the vector passed as an argument
-	void getOutputs(std::vector<double> output);
+	void getOutputs(std::vector<double> &output);
 
 	// Make a copy of all the weights (copy w in wCopy)
 	void copyWeights();

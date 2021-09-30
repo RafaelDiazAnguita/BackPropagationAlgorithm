@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/rafael/UCO/IMC/BackPropagationAlgorithm/la1
+CMAKE_SOURCE_DIR = /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/build
+CMAKE_BINARY_DIR = /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/la1.dir/depend.make
@@ -59,29 +59,29 @@ include CMakeFiles/la1.dir/flags.make
 
 CMakeFiles/la1.dir/la1.cpp.o: CMakeFiles/la1.dir/flags.make
 CMakeFiles/la1.dir/la1.cpp.o: ../la1.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/la1.dir/la1.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/la1.dir/la1.cpp.o -c /home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/la1.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/la1.dir/la1.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/la1.dir/la1.cpp.o -c /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/la1.cpp
 
 CMakeFiles/la1.dir/la1.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/la1.dir/la1.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/la1.cpp > CMakeFiles/la1.dir/la1.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/la1.cpp > CMakeFiles/la1.dir/la1.cpp.i
 
 CMakeFiles/la1.dir/la1.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/la1.dir/la1.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/la1.cpp -o CMakeFiles/la1.dir/la1.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/la1.cpp -o CMakeFiles/la1.dir/la1.cpp.s
 
 CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.o: CMakeFiles/la1.dir/flags.make
 CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.o: ../imc/MultilayerPerceptron.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.o -c /home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/imc/MultilayerPerceptron.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.o -c /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/imc/MultilayerPerceptron.cpp
 
 CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/imc/MultilayerPerceptron.cpp > CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/imc/MultilayerPerceptron.cpp > CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.i
 
 CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/imc/MultilayerPerceptron.cpp -o CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/imc/MultilayerPerceptron.cpp -o CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.s
 
 # Object files for target la1
 la1_OBJECTS = \
@@ -95,7 +95,7 @@ la1: CMakeFiles/la1.dir/la1.cpp.o
 la1: CMakeFiles/la1.dir/imc/MultilayerPerceptron.cpp.o
 la1: CMakeFiles/la1.dir/build.make
 la1: CMakeFiles/la1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable la1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable la1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/la1.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -108,6 +108,6 @@ CMakeFiles/la1.dir/clean:
 .PHONY : CMakeFiles/la1.dir/clean
 
 CMakeFiles/la1.dir/depend:
-	cd /home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/rafael/UCO/IMC/BackPropagationAlgorithm/la1 /home/rafael/UCO/IMC/BackPropagationAlgorithm/la1 /home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/build /home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/build /home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/build/CMakeFiles/la1.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1 /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1 /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/build /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/build /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/build/CMakeFiles/la1.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/la1.dir/depend
 
