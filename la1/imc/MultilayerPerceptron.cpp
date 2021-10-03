@@ -70,6 +70,11 @@ void MultilayerPerceptron::freeMemory()
 	layers.clear();
 }
 
+double MultilayerPerceptron::getDecrementedEta(int layer){
+	double eta_decremented = pow(decrementFactor,-(nOfLayers-layer)) * eta;
+	return eta_decremented;
+}
+
 // ------------------------------
 // Feel all the weights (w) with random numbers between -1 and +1
 void MultilayerPerceptron::randomWeights()
@@ -224,16 +229,16 @@ void MultilayerPerceptron::weightAdjustment()
 	{
 		for (size_t i = 0; i < layers[j].nOfNeurons; i++)
 		{
-			for (size_t k = 0; k < layers[j-1].nOfNeurons; k++)
+			for (size_t k = 0; k < layers[j-1].nOfNeurons; k++)//update weights
 			{
 				layers[j].neurons[i].w[k] = layers[j].neurons[i].w[k]-
-					eta * layers[j].neurons[i].deltaW[k] - mu*(eta* layers[j].neurons[i].lastDeltaW[k]);
+					getDecrementedEta(j) * layers[j].neurons[i].deltaW[k] - mu*(getDecrementedEta(j)* layers[j].neurons[i].lastDeltaW[k]);
 
 			}
 			layers[j].neurons[i].lastDeltaW = layers[j].neurons[i].deltaW; //update last delta
 			
-			layers[j].neurons[i].bias =  layers[j].neurons[i].bias - //bias
-			 	eta * layers[j].neurons[i].deltaBias - mu*(eta* layers[j].neurons[i].lastBias);
+			layers[j].neurons[i].bias =  layers[j].neurons[i].bias - //update bias
+			 	getDecrementedEta(j) * layers[j].neurons[i].deltaBias - mu*(getDecrementedEta(j)* layers[j].neurons[i].lastBias);
 			
 			layers[j].neurons[i].lastBias = layers[j].neurons[i].deltaBias; //update last bias
 			

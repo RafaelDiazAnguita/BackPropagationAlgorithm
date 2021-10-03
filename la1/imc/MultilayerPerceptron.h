@@ -100,6 +100,9 @@ public:
 	// DESTRUCTOR: free memory
 	~MultilayerPerceptron();
 
+	//Decrement Factor 
+	double getDecrementedEta(int layer);
+
 	// Allocate memory for the data structures
     // nl is the number of layers and npl is a vetor containing the number of neurons in every layer
     // Give values to Layer* layers
