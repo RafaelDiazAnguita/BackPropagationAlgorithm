@@ -249,11 +249,14 @@ void MultilayerPerceptron::printNetwork()
 {
 	for (size_t j = 1; j < nOfLayers; j++){
 		std::cout << "LAYER[" << j << "]"<<std::endl;
+
 		for (size_t i = 0; i < layers[j].nOfNeurons; i++){
 			std::cout << "	NEURON[" << i << "]"<<std::endl;
-			for (size_t k = 0; k < layers[j].neurons[i].w.size(); k++){
+			std::cout << "	BIAS : " << layers[j].neurons[i].bias << std::endl;
+
+			for (size_t k = 0; k < layers[j].neurons[i].w.size(); k++)
 				std::cout << "	W[" << i << "][" << k << "]: " << layers[j].neurons[i].w[k];
-			}
+			
 			std::cout << std::endl;
 		}
 	}	

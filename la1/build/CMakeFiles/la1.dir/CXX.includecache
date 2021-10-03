@@ -6,11 +6,35 @@
 
 #IncludeRegexTransform: 
 
-/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/imc/MultilayerPerceptron.h
+/home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/imc/MultilayerPerceptron.cpp
+MultilayerPerceptron.h
+/home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/imc/MultilayerPerceptron.h
+util.h
+/home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/imc/util.h
+iostream
+-
+fstream
+-
+sstream
+-
+string
+-
+cstdlib
+-
+limits
+-
+math.h
+-
+
+/home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/imc/MultilayerPerceptron.h
 vector
 -
 
-/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/la1.cpp
+/home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/imc/util.h
+cstdlib
+-
+
+/home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/la1.cpp
 stdio.h
 -
 stdlib.h
@@ -28,5 +52,5 @@ string.h
 math.h
 -
 imc/MultilayerPerceptron.h
-/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la1/imc/MultilayerPerceptron.h
+/home/rafael/UCO/IMC/BackPropagationAlgorithm/la1/imc/MultilayerPerceptron.h
 
