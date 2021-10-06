@@ -10,10 +10,11 @@
 #include <cstdlib>  // To establish the seed srand() and generate pseudorandom numbers rand()
 
 namespace util{
-static int * integerRandomVectoWithoutRepeating(int min, int max, int howMany){
+static std::vector<int> integerRandomVectoWithoutRepeating(int min, int max, int howMany){
         int total = max-min+1;
         int* numbersToBeSelected = new int[total];
-        int* numbersSelected = new int[howMany];
+        std::vector<int> numbersSelected;
+        numbersSelected.resize(howMany); 
         // Initialize the list of possible selections
         for(int i = 0; i < total; i++)
                 numbersToBeSelected[i] = min+i;

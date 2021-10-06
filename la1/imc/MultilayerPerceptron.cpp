@@ -69,7 +69,8 @@ void MultilayerPerceptron::freeMemory()
 {
 	layers.clear();
 }
-
+//
+//Return decremented eta by layer
 double MultilayerPerceptron::getDecrementedEta(int layer){
 	double eta_decremented = pow(decrementFactor,-(nOfLayers-layer)) * eta;
 	return eta_decremented;
@@ -395,15 +396,35 @@ void MultilayerPerceptron::runOnlineBackPropagation(Dataset *trainDataset, Datas
 
 
 	double minTrainError = 0;
-	int iterWithoutImproving;
+	int iterWithoutImproving,valWithoutImproving;
 	double testError = 0;
 
 	double validationError = 1;
 
 	// Generate validation data
+	Dataset * validationDataset = new Dataset;
 	if (validationRatio > 0 && validationRatio < 1)
 	{
-		// .......
+		validationDataset->nOfPatterns = trainDataset->nOfPatterns * validationRatio;
+		validationDataset->nOfInputs = trainDataset->nOfInputs;
+		validationDataset->nOfOutputs = trainDataset->nOfOutputs;
+
+		std::vector<int> patterns_to_select = integerRandomVectoWithoutRepeating(0,trainDataset->nOfPatterns-1,
+																			validationDataset->nOfPatterns);
+		//add patterns to validation dataset
+		for (size_t i = 0; i < validationDataset->nOfPatterns; i++)
+		{
+			validationDataset->inputs.push_back(trainDataset->inputs[patterns_to_select[i]]);
+			validationDataset->outputs.push_back(trainDataset->outputs[patterns_to_select[i]]);
+		}
+		//erase patterns from train dataset
+		for (size_t i = 0; i < patterns_to_select.size(); i++)
+		{
+			trainDataset->inputs.erase( trainDataset->inputs.begin()+ patterns_to_select[i] );
+			trainDataset->outputs.erase( trainDataset->outputs.begin()+ patterns_to_select[i] );
+			trainDataset->nOfPatterns--;
+		}
+		
 	}
 
 	// Learning
@@ -436,6 +457,26 @@ void MultilayerPerceptron::runOnlineBackPropagation(Dataset *trainDataset, Datas
 		// BE CAREFUL: in this case, we have to save the last validation error, not the minimum one
 		// Apart from this, the way the stopping condition is checked is the same than that
 		// applied for the training set
+		if (validationRatio > 0 && validationRatio < 1){
+			double lastValidationError = test(validationDataset);
+			if (countTrain == 0 || lastValidationError < validationError)
+			{
+				validationError = lastValidationError;
+				copyWeights();
+				valWithoutImproving = 0;
+			}
+			else if ((trainError - minTrainError) < 0.00001)
+				valWithoutImproving = 0;
+			else
+				valWithoutImproving++;
+
+			if (valWithoutImproving == 50)
+			{
+				cout << "Validation has forced early stopping!!" << endl;
+				restoreWeights();
+				countTrain = maxiter;
+			}
+		}
 
 		cout << "Iteration " << countTrain << "\t Training error: " << trainError << "\t Validation error: " << validationError << endl;
 
