@@ -191,8 +191,8 @@ int main(int argc, char **argv) {
 
         for (size_t i = 0; i < 5; i++)
         {
-            stdTrainError += pow(abs(trainErrors[i]-averageTrainError),2);
-            stdTestError += pow(abs(testErrors[i]-averageTestError),2);
+            stdTrainError += pow(fabs(trainErrors[i]-averageTrainError),2);
+            stdTestError += pow(fabs(testErrors[i]-averageTestError),2);
         }
         stdTrainError = sqrt(stdTrainError/5);
         stdTestError = sqrt(stdTestError/5);
