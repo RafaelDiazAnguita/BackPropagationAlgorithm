@@ -123,7 +123,7 @@ public:
 	// Run the traning algorithm for a given number of epochs, using trainDataset
     // Once finished, check the performance of the network in testDataset
     // Both training and test MSEs should be obtained and stored in errorTrain and errorTest
-	void runOnlineBackPropagation(Dataset * trainDataset, Dataset * testDataset, int maxiter, double *errorTrain, double *errorTest);
+	void runOnlineBackPropagation(Dataset * trainDataset, Dataset * testDataset, int maxiter, double *errorTrain, double *errorTest,int &totalIterations);
 
 	// Optional Kaggle: Save the model weights in a textfile
 	bool saveWeights(const char * archivo);

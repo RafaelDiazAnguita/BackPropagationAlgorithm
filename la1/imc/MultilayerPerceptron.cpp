@@ -237,8 +237,8 @@ void MultilayerPerceptron::weightAdjustment()
 
 			}
 			layers[j].neurons[i].lastDeltaW = layers[j].neurons[i].deltaW; //update last delta
-			
-			layers[j].neurons[i].bias =  layers[j].neurons[i].bias - //update bias
+			//update bias
+			layers[j].neurons[i].bias =  layers[j].neurons[i].bias - 
 			 	getDecrementedEta(j) * layers[j].neurons[i].deltaBias - mu*(getDecrementedEta(j)* layers[j].neurons[i].lastBias);
 			
 			layers[j].neurons[i].lastBias = layers[j].neurons[i].deltaBias; //update last bias
@@ -387,7 +387,8 @@ void MultilayerPerceptron::predict(Dataset *pDatosTest)
 // Run the traning algorithm for a given number of epochs, using trainDataset
 // Once finished, check the performance of the network in testDataset
 // Both training and test MSEs should be obtained and stored in errorTrain and errorTest
-void MultilayerPerceptron::runOnlineBackPropagation(Dataset *trainDataset, Dataset *pDatosTest, int maxiter, double *errorTrain, double *errorTest)
+void MultilayerPerceptron::runOnlineBackPropagation(Dataset *trainDataset, Dataset *pDatosTest, int maxiter, double *errorTrain, double *errorTest,
+													int &totalIterations)
 {
 	int countTrain = 0;
 
@@ -448,7 +449,8 @@ void MultilayerPerceptron::runOnlineBackPropagation(Dataset *trainDataset, Datas
 		{
 			cout << "We exit because the training is not improving!!" << endl;
 			restoreWeights();
-			countTrain = maxiter;
+			totalIterations += countTrain;
+			break;
 		}
 
 		countTrain++;
@@ -474,7 +476,8 @@ void MultilayerPerceptron::runOnlineBackPropagation(Dataset *trainDataset, Datas
 			{
 				cout << "Validation has forced early stopping!!" << endl;
 				restoreWeights();
-				countTrain = maxiter;
+				totalIterations += countTrain;
+				break;
 			}
 		}
 
