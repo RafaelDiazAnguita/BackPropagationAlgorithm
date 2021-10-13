@@ -201,7 +201,7 @@ int main(int argc, char **argv) {
         
         cout << "FINAL REPORT" << endl;
         cout << "************" << endl;
-        cout << "Total Iterations Mean: " << totalIterations << endl;
+        cout << "Total Iterations: " << totalIterations << endl;
         cout << "Train error (Mean +- SD): " << averageTrainError << " +- " << stdTrainError << endl;
         cout << "Test error (Mean +- SD):  " << averageTestError << " +- " << stdTestError << endl;
         return EXIT_SUCCESS;
