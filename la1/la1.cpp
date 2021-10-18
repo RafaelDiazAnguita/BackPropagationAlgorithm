@@ -99,6 +99,11 @@ int main(int argc, char **argv) {
         }
     }
 
+    if(t_flag == false){
+        std::cout<<"The option -t is required"<<std::endl;
+        exit(-1);
+    }
+
     if (!p_flag) {
         //////////////////////////////////
         // TRAINING AND EVALUATION MODE //
