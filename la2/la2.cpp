@@ -169,7 +169,7 @@ int main(int argc, char **argv) {
                 topology[i] = atoi(h_value);
         else
             for (size_t i = 1; i <= layers; i++)
-                topology[i] = 5;
+                topology[i] = 4;
 
         // Initialize the network using the topology vector
         mlp.initialize(layers+2,topology);
