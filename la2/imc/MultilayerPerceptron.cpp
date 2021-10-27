@@ -171,6 +171,7 @@ void MultilayerPerceptron::forwardPropagate() {
 		double sum = 0;
 		for (size_t i = 0; i < layers[nOfLayers-1].nOfNeurons; i++)
 			sum += exp( layers[nOfLayers-1].neurons[i].out );
+
 		for (size_t i = 0; i < layers[nOfLayers-1].nOfNeurons; i++)
 			layers[nOfLayers-1].neurons[i].out = exp (layers[nOfLayers-1].neurons[i].out) / sum;
 	}
@@ -235,9 +236,9 @@ void MultilayerPerceptron::backpropagateError(std::vector<double> target, int er
 					for (size_t k = 0; k < layers[j].nOfNeurons; k++)
 					{
 						if (k == i)
-							layers[j].neurons[i].delta = (target[k] - layers[j].neurons[k].out ) * layers[j].neurons[i].out * (1-layers[j].neurons[k].out);
+							layers[j].neurons[i].delta += (target[k] - layers[j].neurons[k].out ) * layers[j].neurons[i].out * (1-layers[j].neurons[k].out);
 						else
-							layers[j].neurons[i].delta = (target[k] - layers[j].neurons[k].out ) * layers[j].neurons[i].out * (-layers[j].neurons[k].out);
+							layers[j].neurons[i].delta += (target[k] - layers[j].neurons[k].out ) * layers[j].neurons[i].out * (-layers[j].neurons[k].out);
 					}
 					layers[j].neurons[i].delta = - layers[j].neurons[i].delta;
 				}
@@ -247,9 +248,9 @@ void MultilayerPerceptron::backpropagateError(std::vector<double> target, int er
 					for (size_t k = 0; k < layers[j].nOfNeurons; k++)
 					{
 						if (k == i)
-							layers[j].neurons[i].delta = (target[k] / layers[j].neurons[k].out ) * layers[j].neurons[i].out * (1-layers[j].neurons[k].out);
+							layers[j].neurons[i].delta += (target[k] / layers[j].neurons[k].out ) * layers[j].neurons[i].out * (1-layers[j].neurons[k].out);
 						else
-							layers[j].neurons[i].delta = (target[k] / layers[j].neurons[k].out ) * layers[j].neurons[i].out * (-layers[j].neurons[k].out);
+							layers[j].neurons[i].delta += (target[k] / layers[j].neurons[k].out ) * layers[j].neurons[i].out * (-layers[j].neurons[k].out);
 					}
 					layers[j].neurons[i].delta = - layers[j].neurons[i].delta;
 				}
