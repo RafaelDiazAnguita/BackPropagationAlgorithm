@@ -92,6 +92,25 @@ double MultilayerPerceptron::getDecrementedEta(int layer){
 	return eta_decremented;
 }
 
+//checkClass
+void MultilayerPerceptron::checkClass(int &class_desired,int &class_obtained,std::vector<double> prediction,std::vector<double> pattern_outputs){
+	
+	double max = prediction[0];
+	class_obtained = 0;
+		for (size_t j = 1; j < prediction.size(); j++)
+		if( prediction[j] > max){
+			max = prediction[j];
+			class_obtained = j;
+		}
+	//max class index pattern
+	max = pattern_outputs[0];
+	class_desired = 0;
+	for (size_t j = 1; j < pattern_outputs.size(); j++)
+		if( pattern_outputs[j] > max){
+			max = pattern_outputs[j];
+			class_desired = pattern_outputs[j];
+		}
+}
 // ------------------------------
 // Fill all the weights (w) with random numbers between -1 and +1
 void MultilayerPerceptron::randomWeights() {
@@ -197,11 +216,18 @@ double MultilayerPerceptron::obtainError(std::vector<double> target, int errorFu
 		double error = 0.0;
 		for (size_t i = 0; i < layers[nOfLayers - 1].nOfNeurons; i++)
 		{
-			int d;
-			if( layers[nOfLayers - 1].neurons[i].out > 0.5 )
+			int d,class_desired,class_obtained;
+			std::vector<double> prediction;
+			prediction.resize(target.size());
+			getOutputs(prediction);
+			
+			checkClass(class_desired,class_obtained,prediction,target);
+
+			if( class_desired == class_obtained )
 				d = 1;
 			else
 				d = 0;
+
 			error += log(layers[nOfLayers - 1].neurons[i].out) * d;
 		}
 		error /= layers[nOfLayers - 1].nOfNeurons;
@@ -243,7 +269,7 @@ void MultilayerPerceptron::backpropagateError(std::vector<double> target, int er
 					layers[j].neurons[i].delta = - layers[j].neurons[i].delta;
 				}
 				//softmax and Entropy
-				else if(outputFunction == 1 && errorFunction == 0){
+				else if(outputFunction == 1 && errorFunction == 1){
 					layers[j].neurons[i].delta = 0;
 					for (size_t k = 0; k < layers[j].nOfNeurons; k++)
 					{
@@ -454,24 +480,10 @@ double MultilayerPerceptron::testClassification(Dataset* dataset) {
 		getOutputs(prediction);
 
 		//max predicted
-		double max = prediction[0];
-		double class_clasificated = 0;
-		for (size_t j = 1; j < prediction.size(); j++)
-			if( prediction[j] > max){
-				max = prediction[j];
-				class_clasificated = j;
-			}
-		//max class index pattern
-		max = dataset->outputs[i][0];
-		double index_class = 0;
-		for (size_t j = 1; j < dataset->outputs[i].size(); j++)
-			if( dataset->outputs[i][j] > max){
-				max = dataset->outputs[i][j];
-				index_class = dataset->outputs[i][j];
-			}
-		
+		int class_desired,class_obtained;
+		checkClass(class_desired,class_obtained,prediction,dataset->outputs[i]);
 
-		if (index_class == class_clasificated)
+		if (class_desired == class_obtained)
 			sum++;
 				
 		prediction.clear();

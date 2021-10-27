@@ -51,6 +51,9 @@ private:
 	//get decremented eta
 	double getDecrementedEta(int layer);
 
+	//checkClass for softmax
+	void checkClass(int &class_desired,int &class_obtained,std::vector<double> prediction,std::vector<double> pattern_outputs);
+
 	// Fill all the weights (w) with random numbers between -1 and +1
 	void randomWeights();
 
