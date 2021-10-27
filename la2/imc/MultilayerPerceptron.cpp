@@ -235,9 +235,9 @@ void MultilayerPerceptron::backpropagateError(std::vector<double> target, int er
 					for (size_t k = 0; k < layers[j].nOfNeurons; k++)
 					{
 						if (k == i)
-							layers[j].neurons[i].delta = (target[i] - layers[j].neurons[i].out ) * layers[j].neurons[i].out * (1-layers[j].neurons[k].out);
+							layers[j].neurons[i].delta = (target[k] - layers[j].neurons[k].out ) * layers[j].neurons[i].out * (1-layers[j].neurons[k].out);
 						else
-							layers[j].neurons[i].delta = (target[i] - layers[j].neurons[i].out ) * layers[j].neurons[i].out * (-layers[j].neurons[k].out);
+							layers[j].neurons[i].delta = (target[k] - layers[j].neurons[k].out ) * layers[j].neurons[i].out * (-layers[j].neurons[k].out);
 					}
 					layers[j].neurons[i].delta = - layers[j].neurons[i].delta;
 				}
@@ -247,9 +247,9 @@ void MultilayerPerceptron::backpropagateError(std::vector<double> target, int er
 					for (size_t k = 0; k < layers[j].nOfNeurons; k++)
 					{
 						if (k == i)
-							layers[j].neurons[i].delta = (target[i] / layers[j].neurons[i].out ) * layers[j].neurons[i].out * (1-layers[j].neurons[k].out);
+							layers[j].neurons[i].delta = (target[k] / layers[j].neurons[k].out ) * layers[j].neurons[i].out * (1-layers[j].neurons[k].out);
 						else
-							layers[j].neurons[i].delta = (target[i] / layers[j].neurons[i].out ) * layers[j].neurons[i].out * (-layers[j].neurons[k].out);
+							layers[j].neurons[i].delta = (target[k] / layers[j].neurons[k].out ) * layers[j].neurons[i].out * (-layers[j].neurons[k].out);
 					}
 					layers[j].neurons[i].delta = - layers[j].neurons[i].delta;
 				}
@@ -452,9 +452,26 @@ double MultilayerPerceptron::testClassification(Dataset* dataset) {
 		forwardPropagate();
 		getOutputs(prediction);
 
-		for(int j=0; j<dataset->nOfOutputs; j++)
-			if (dataset->outputs[i][j] == prediction[j])
-				sum++;
+		//max predicted
+		double max = prediction[0];
+		double class_clasificated = 0;
+		for (size_t j = 1; j < prediction.size(); j++)
+			if( prediction[j] > max){
+				max = prediction[j];
+				class_clasificated = j;
+			}
+		//max class index pattern
+		max = dataset->outputs[i][0];
+		double index_class = 0;
+		for (size_t j = 1; j < dataset->outputs[i].size(); j++)
+			if( dataset->outputs[i][j] > max){
+				max = dataset->outputs[i][j];
+				index_class = dataset->outputs[i][j];
+			}
+		
+
+		if (index_class == class_clasificated)
+			sum++;
 				
 		prediction.clear();
 

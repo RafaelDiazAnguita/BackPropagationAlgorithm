@@ -44,10 +44,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la2
+CMAKE_SOURCE_DIR = /home/rafael/UCO/IMC/BackPropagationAlgorithm/la2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la2/build
+CMAKE_BINARY_DIR = /home/rafael/UCO/IMC/BackPropagationAlgorithm/la2/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -74,14 +74,14 @@ clean: CMakeFiles/la2.dir/clean
 CMakeFiles/la2.dir/all:
 	$(MAKE) -f CMakeFiles/la2.dir/build.make CMakeFiles/la2.dir/depend
 	$(MAKE) -f CMakeFiles/la2.dir/build.make CMakeFiles/la2.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la2/build/CMakeFiles --progress-num=1,2,3 "Built target la2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rafael/UCO/IMC/BackPropagationAlgorithm/la2/build/CMakeFiles --progress-num=1,2,3 "Built target la2"
 .PHONY : CMakeFiles/la2.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/la2.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la2/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafael/UCO/IMC/BackPropagationAlgorithm/la2/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/la2.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la2/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafael/UCO/IMC/BackPropagationAlgorithm/la2/build/CMakeFiles 0
 .PHONY : CMakeFiles/la2.dir/rule
 
 # Convenience name for target.
