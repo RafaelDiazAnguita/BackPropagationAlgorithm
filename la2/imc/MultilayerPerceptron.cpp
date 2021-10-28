@@ -223,7 +223,7 @@ double MultilayerPerceptron::obtainError(std::vector<double> target, int errorFu
 			
 			checkClass(class_desired,class_obtained,prediction,target);
 
-			if( class_obtained == i )
+			if( class_desired == i )
 				d = 1;
 			else
 				d = 0;
