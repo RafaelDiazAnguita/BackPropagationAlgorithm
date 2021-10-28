@@ -179,7 +179,7 @@ void MultilayerPerceptron::forwardPropagate() {
 		
 		net += layers[j].neurons[i].bias;	//bias
 		//h(net)
-		if( outputFunction == 1 && j == nOfLayers)		//prepare net for softmax
+		if( outputFunction == 1 && j == nOfLayers -1)		//prepare net for softmax
 			layers[j].neurons[i].out = net;
 		else										//sigmoid
 			layers[j].neurons[i].out = 1 / (1 + exp(-net)); 
@@ -187,12 +187,12 @@ void MultilayerPerceptron::forwardPropagate() {
 	}
 	//apply softmax if necessary
 	if(outputFunction == 1){
-		double sum = 0;
+		double sum = 0.0;
 		for (size_t i = 0; i < layers[nOfLayers-1].nOfNeurons; i++)
 			sum += exp( layers[nOfLayers-1].neurons[i].out );
 
 		for (size_t i = 0; i < layers[nOfLayers-1].nOfNeurons; i++)
-			layers[nOfLayers-1].neurons[i].out = exp (layers[nOfLayers-1].neurons[i].out) / sum;
+			layers[nOfLayers-1].neurons[i].out = (exp(layers[nOfLayers-1].neurons[i].out)) / sum;
 	}
 }
 

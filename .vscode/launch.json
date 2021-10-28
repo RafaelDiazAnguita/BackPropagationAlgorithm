@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la2/build/la2",
             "args": ["-t","/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/datasetsLA2IMC/dat/train_nomnist.dat",
-                "-T","/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/datasetsLA2IMC/dat/test_nomnist.dat","-f","1"],
+                "-T","/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/datasetsLA2IMC/dat/test_nomnist.dat","-s"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
