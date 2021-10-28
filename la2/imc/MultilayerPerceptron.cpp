@@ -108,7 +108,7 @@ void MultilayerPerceptron::checkClass(int &class_desired,int &class_obtained,std
 	for (size_t j = 1; j < pattern_outputs.size(); j++)
 		if( pattern_outputs[j] > max){
 			max = pattern_outputs[j];
-			class_desired = pattern_outputs[j];
+			class_desired = j;
 		}
 }
 // ------------------------------
@@ -273,6 +273,8 @@ void MultilayerPerceptron::backpropagateError(std::vector<double> target, int er
 					layers[j].neurons[i].delta = 0;
 					for (size_t k = 0; k < layers[j].nOfNeurons; k++)
 					{
+						//std::cout<<"OUT:"<<layers[j].neurons[i].out<<std::endl;
+						//std::cout<<"DELTA:"<<layers[j].neurons[i].delta<<std::endl;
 						if (k == i)
 							layers[j].neurons[i].delta += (target[k] / layers[j].neurons[k].out ) * layers[j].neurons[i].out * (1-layers[j].neurons[k].out);
 						else
@@ -319,8 +321,9 @@ void MultilayerPerceptron::accumulateChange() {
 }
 
 // ------------------------------
-// Update the network weights, from the first layer to the last one
-void MultilayerPerceptron::weightAdjustment() {
+// Update online the network weights, from the first layer to the last one
+void MultilayerPerceptron::onlineWeightAdjustment() {
+
 
 	for (size_t j = 1; j < nOfLayers;  j++)
 	{
@@ -344,6 +347,32 @@ void MultilayerPerceptron::weightAdjustment() {
 	}
 }
 
+// ------------------------------
+// Update offline the network weights, from the first layer to the last one
+void MultilayerPerceptron::offlineWeightAdjustment(int N) {
+
+
+	for (size_t j = 1; j < nOfLayers;  j++)
+	{
+		for (size_t i = 0; i < layers[j].nOfNeurons; i++)
+		{
+			for (size_t k = 0; k < layers[j-1].nOfNeurons; k++)//update weights
+			{
+				layers[j].neurons[i].w[k] = layers[j].neurons[i].w[k]-
+					getDecrementedEta(j) * layers[j].neurons[i].deltaW[k]/N - mu*(getDecrementedEta(j)* layers[j].neurons[i].lastDeltaW[k])/N;
+
+			}
+			layers[j].neurons[i].lastDeltaW = layers[j].neurons[i].deltaW; //update last delta
+			//update bias
+			layers[j].neurons[i].bias =  layers[j].neurons[i].bias - 
+			 	getDecrementedEta(j) * layers[j].neurons[i].deltaBias/N  - mu*(getDecrementedEta(j)* layers[j].neurons[i].lastBias)/N ;
+			
+			layers[j].neurons[i].lastBias = layers[j].neurons[i].deltaBias; //update last bias
+			
+		}
+		
+	}
+}
 // ------------------------------
 // Print the network, i.e. all the weight matrices
 void MultilayerPerceptron::printNetwork() {
@@ -380,7 +409,7 @@ void MultilayerPerceptron::performEpoch(std::vector<double> input, std::vector<d
 	accumulateChange();
 
 	if( online )
-	weightAdjustment();
+	onlineWeightAdjustment();
 }
 
 // ------------------------------
@@ -436,7 +465,7 @@ void MultilayerPerceptron::train(Dataset* trainDataset, int errorFunction) {
 	{
 		performEpoch(trainDataset->inputs[i], trainDataset->outputs[i],errorFunction);
 		if (!online) 
-		weightAdjustment();
+		offlineWeightAdjustment(trainDataset->nOfPatterns);
 	}
 	
 }
@@ -483,8 +512,10 @@ double MultilayerPerceptron::testClassification(Dataset* dataset) {
 		int class_desired,class_obtained;
 		checkClass(class_desired,class_obtained,prediction,dataset->outputs[i]);
 
-		if (class_desired == class_obtained)
+		if (class_desired == class_obtained){
 			sum++;
+		}
+			
 				
 		prediction.clear();
 
@@ -529,7 +560,7 @@ void MultilayerPerceptron::predict(Dataset* dataset)
 // Both training and test MSEs should be obtained and stored in errorTrain and errorTest
 // Both training and test CCRs should be obtained and stored in ccrTrain and ccrTest
 // errorFunction=1 => Cross Entropy // errorFunction=0 => MSE
-void MultilayerPerceptron::runBackPropagation(Dataset * trainDataset, Dataset * testDataset, int maxiter, double *errorTrain, double *errorTest, double *ccrTrain, double *ccrTest, int errorFunction)
+void MultilayerPerceptron::runBackPropagation(Dataset * trainDataset, Dataset * testDataset, int maxiter, double *errorTrain, double *errorTest, double *ccrTrain, double *ccrTest, int errorFunction,int &total_iterations)
 {
 	int countTrain = 0;
 
@@ -588,6 +619,7 @@ void MultilayerPerceptron::runBackPropagation(Dataset * trainDataset, Dataset * 
 		if(iterWithoutImproving==50){
 			std::cout << "We exit because the training is not improving!!"<< endl;
 			restoreWeights();
+			total_iterations+=countTrain;
 			countTrain = maxiter;
 		}
 
@@ -608,6 +640,7 @@ void MultilayerPerceptron::runBackPropagation(Dataset * trainDataset, Dataset * 
 			if(iterWithoutImprovingValidation==50){
 				std::cout << "We exit because validation is not improving!!"<< endl;
 				restoreWeights();
+				total_iterations+=countTrain;
 				countTrain = maxiter;
 			}
 		}

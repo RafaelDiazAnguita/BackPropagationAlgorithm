@@ -181,12 +181,13 @@ int main(int argc, char **argv) {
 		double *trainCCRs = new double[5];
 		double *testCCRs = new double[5];
 		double bestTestError = DBL_MAX;
+        int total_iterations = 0;
 		for(int i=0; i<5; i++){
 			cout << "**********" << endl;
 			cout << "SEED " << seeds[i] << endl;
 			cout << "**********" << endl;
 			srand(seeds[i]);
-			mlp.runBackPropagation(trainDataset,testDataset,maxIter,&(trainErrors[i]),&(testErrors[i]),&(trainCCRs[i]),&(testCCRs[i]),error);
+			mlp.runBackPropagation(trainDataset,testDataset,maxIter,&(trainErrors[i]),&(testErrors[i]),&(trainCCRs[i]),&(testCCRs[i]),error,total_iterations);
 			cout << "We end!! => Final test CCR: " << testCCRs[i] << endl;
 
 			// We save the weights every time we find a better model
@@ -197,6 +198,7 @@ int main(int argc, char **argv) {
 			}
 		}
 
+        std::cout<<"Total Iterations: "<<total_iterations<<std::endl;
 
 		double trainAverageError = 0, trainStdError = 0;
 		double testAverageError = 0, testStdError = 0;
