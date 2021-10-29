@@ -36,25 +36,3 @@ cstdlib
 vector
 -
 
-/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la2/la2.cpp
-stdio.h
--
-stdlib.h
--
-unistd.h
--
-iostream
--
-ctime
--
-cstdlib
--
-string.h
--
-math.h
--
-float.h
--
-imc/MultilayerPerceptron.h
-/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la2/imc/MultilayerPerceptron.h
-

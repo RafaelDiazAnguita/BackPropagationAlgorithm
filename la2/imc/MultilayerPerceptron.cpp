@@ -619,8 +619,7 @@ void MultilayerPerceptron::runBackPropagation(Dataset * trainDataset, Dataset * 
 		if(iterWithoutImproving==50){
 			std::cout << "We exit because the training is not improving!!"<< endl;
 			restoreWeights();
-			total_iterations+=countTrain;
-			countTrain = maxiter;
+			break;
 		}
 
 		countTrain++;
@@ -640,14 +639,15 @@ void MultilayerPerceptron::runBackPropagation(Dataset * trainDataset, Dataset * 
 			if(iterWithoutImprovingValidation==50){
 				std::cout << "We exit because validation is not improving!!"<< endl;
 				restoreWeights();
-				total_iterations+=countTrain;
-				countTrain = maxiter;
+				break;
 			}
 		}
 
 		std::cout << "Iteration " << countTrain << "\t Training error: " << trainError << "\t Validation error: " << validationError << endl;
 
 	} while ( countTrain<maxiter );
+
+	total_iterations+=countTrain;
 
 	if ( (iterWithoutImprovingValidation!=50) && (iterWithoutImproving!=50))
 		restoreWeights();
