@@ -10,30 +10,30 @@ import pandas as pd
 
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("output_sin_1.csv")
+df = pd.read_csv("output_1.csv")
 
 
 plt.plot(df['Iteration'],df['TrainingError'], label='Seed 1')
 
-df = pd.read_csv("output_sin_2.csv")
+df = pd.read_csv("output_2.csv")
 
 plt.plot(df['Iteration'],df['TrainingError'], label='Seed 2')
 
-df = pd.read_csv("output_sin_3.csv")
+df = pd.read_csv("output_3.csv")
 
 plt.plot(df['Iteration'],df['TrainingError'], label='Seed 3')
 
-df = pd.read_csv("output_sin_4.csv")
+df = pd.read_csv("output_4.csv")
 
 plt.plot(df['Iteration'],df['TrainingError'], label='Seed 4')
 
-df = pd.read_csv("output_sin_5.csv")
+df = pd.read_csv("output_5.csv")
 
 plt.plot(df['Iteration'],df['TrainingError'], label='Seed 5')
 
 plt.legend()
 
-plt.title("PARKINSONS")
+plt.title("NOMNIST")
 
 plt.xlabel('Epoch')
 
