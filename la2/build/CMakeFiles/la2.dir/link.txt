@@ -1,1 +1,0 @@
-/usr/bin/c++  -O3  -rdynamic CMakeFiles/la2.dir/la2.cpp.o CMakeFiles/la2.dir/imc/MultilayerPerceptron.cpp.o  -o la2 

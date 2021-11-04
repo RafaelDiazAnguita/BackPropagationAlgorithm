@@ -1,3 +1,0 @@
-/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la2/build/CMakeFiles/rebuild_cache.dir
-/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la2/build/CMakeFiles/edit_cache.dir
-/home/i82dianr/UCO/IMC/BackPropagationAlgorithm/la2/build/CMakeFiles/la2.dir
